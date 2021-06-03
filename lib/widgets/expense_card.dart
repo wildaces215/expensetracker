@@ -11,7 +11,17 @@ class ExpenseCard extends StatelessWidget {
       child: InkWell(
         child: Card(
           child: ListTile(
-              leading: Text(title), trailing: Text(expense.toString())),
+              leading: Text(
+                title,
+                style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyText1.color,
+                    fontSize: Theme.of(context).textTheme.bodyText1.fontSize),
+              ),
+              trailing: Text("\$ " + expense.toStringAsFixed(2),
+                  style: TextStyle(
+                      color: Theme.of(context).textTheme.bodyText1.color,
+                      fontSize:
+                          Theme.of(context).textTheme.bodyText1.fontSize))),
         ),
       ),
     ));

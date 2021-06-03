@@ -1,29 +1,35 @@
 import 'package:expensetracker/screens/app_container.dart';
-import 'package:expensetracker/services/db.dart';
 import 'package:flutter/material.dart';
+import 'package:expensetracker/controller/controller.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import 'package:get/get.dart';
+
+//80.6 %#abd0d1
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(MyApp());
+  DbController controller = DbController();
+  controller.getExpenses();
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.blue,
+          fontFamily: GoogleFonts.playfairDisplay().fontFamily,
+          textTheme: TextTheme(
+            headline1: TextStyle(
+                color: Color.fromARGB(255, 104, 128, 128),
+                fontWeight: FontWeight.w900),
+            bodyText1: TextStyle(
+                color: Color.fromARGB(255, 104, 128, 128), fontSize: 17),
+          )),
       home: AppContainer(),
     );
   }

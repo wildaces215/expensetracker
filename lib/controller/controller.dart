@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:expensetracker/services/db.dart';
 
 class DbController extends GetxController {
-  var data = <Expense>[]?.obs;
+  var data = <Expense>[].obs;
   TextEditingController titleController;
   TextEditingController amountController;
 
@@ -27,16 +27,16 @@ class DbController extends GetxController {
     });
   }
 
-  void setDeleteExpense(int _id) async {
-    DbClass.instance.deleteExpense(_id);
+  Future<int> setDeleteExpense(int _id) async {
     data.removeWhere((element) => element.id == _id);
+    return await DbClass.instance.deleteExpense(_id);
   }
 
   void setNewExpense() async {
     await DbClass.instance.newExpense(Expense(
         expense: titleController.text,
         amount: double.parse(amountController.text)));
-    data.add(Expense(
+    await data.add(Expense(
         expense: titleController.text,
         amount: double.parse(amountController.text)));
     titleController.clear();

@@ -27,7 +27,7 @@ class DbClass {
 
   Future<List<Map<String, dynamic>>> allExpenses() async {
     final db = await DbClass.instance.init();
-    var res = await db.query(DbClass.TABLE_NAME, orderBy: "$ID DESC");
+    var res = await db.rawQuery("SELECT * FROM $TABLE_NAME");
 
     return res;
   }
@@ -44,6 +44,7 @@ class DbClass {
 
   Future<int> deleteExpense(int _id) async {
     Database db = await DbClass.instance.init();
+    print(_id);
     return await db
         .delete(DbClass.TABLE_NAME, where: '$ID=?', whereArgs: [_id]);
   }
