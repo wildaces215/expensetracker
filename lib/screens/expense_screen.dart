@@ -40,8 +40,52 @@ class ExpenseScreen extends StatelessWidget {
                                     context: context,
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                          title: Text(
-                                              'Are you sure you want to delete?'));
+                                        title: Text(
+                                            'Are you sure you want to delete?',
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1
+                                                    .color)),
+                                        content: Row(
+                                          children: [
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                  primary: Colors.white,
+                                                  elevation: 0,
+                                                  shadowColor: Colors.white),
+                                              child: Text('Yes',
+                                                  style: TextStyle(
+                                                      color: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyText1
+                                                          .color)),
+                                              onPressed: () {
+                                                _controller.setDeleteExpense(
+                                                    _controller.data[index].id);
+                                                Navigator.pop(context);
+                                              },
+                                            ),
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                  primary: Colors.white,
+                                                  elevation: 0,
+                                                  shadowColor: Colors.white),
+                                              child: Text(
+                                                'No',
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyText1
+                                                        .color),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                            )
+                                          ],
+                                        ),
+                                      );
                                     });
                                 /*
                                 _controller.setDeleteExpense(

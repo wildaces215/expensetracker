@@ -33,9 +33,10 @@ dependencies:
   google_fonts: ^2.1.0
   path_provider: ^2.0.2
   shared_preferences: ^2.0.6
-
+  in_app_purchase: ^1.0.5
   cupertino_setting_control: ^1.0.2
   flutter_local_notifications: 7.0.0-dev.1
+  timezone: ^0.7.0
 flutter_icons:
   image_path: "assets/launcher/logo.png"
   android: true
@@ -44,9 +45,14 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.9.0
-
+  flutter_native_splash: 1.1.8+4
   sqflite_common_ffi: ^2.0.0
 
+flutter_native_splash:
+  color: "#abd0d1"
+  image: "assets/launcher/logo.png"
+  ios: true
+  android: true
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
