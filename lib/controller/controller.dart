@@ -7,7 +7,8 @@ class DbController extends GetxController {
   var data = <Expense>[].obs;
   TextEditingController titleController;
   TextEditingController amountController;
-
+  TextEditingController categoryController;
+  String category;
   @override
   void onInit() {
     super.onInit();
@@ -22,7 +23,8 @@ class DbController extends GetxController {
         data.add(Expense(
             id: element['id'],
             expense: element['expense'],
-            amount: element['amount']));
+            amount: element['amount'],
+            category: element['category']));
       });
     });
   }
@@ -35,11 +37,14 @@ class DbController extends GetxController {
   void setNewExpense() async {
     await DbClass.instance.newExpense(Expense(
         expense: titleController.text,
-        amount: double.parse(amountController.text)));
+        amount: double.parse(amountController.text),
+        category: category));
     await data.add(Expense(
         expense: titleController.text,
-        amount: double.parse(amountController.text)));
+        amount: double.parse(amountController.text),
+        category: category));
     titleController.clear();
     amountController.clear();
+    category = null;
   }
 }

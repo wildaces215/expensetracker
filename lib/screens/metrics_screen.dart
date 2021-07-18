@@ -6,15 +6,20 @@ class MetricsScreen extends StatelessWidget {
     return Scaffold(
         body: Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            'Coming Soon!',
-            textScaleFactor: 1.25,
-          )
+          Container(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'Total Expenses',
+                textAlign: TextAlign.center,
+                textScaleFactor: 2.0,
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.headline1.color,
+                ),
+              ))
         ],
       ),
+      ListView(children: [],)
     ));
   }
 }

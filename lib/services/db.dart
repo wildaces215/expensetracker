@@ -12,6 +12,7 @@ class DbClass {
   static const ID = 'id';
   static const EXPENSE_NAME = 'expense';
   static const AMOUNT = 'amount';
+  static const CATEGORY = 'category';
 
   Future<String> retrievePath() async {
     return join(await getDatabasesPath(), 'db.db');
@@ -21,7 +22,7 @@ class DbClass {
     return await openDatabase(await retrievePath(), version: VERSION,
         onCreate: (db, version) {
       return db.execute(
-          'CREATE TABLE $TABLE_NAME($ID INTEGER PRIMARY KEY,$EXPENSE_NAME TEXT,$AMOUNT REAL)');
+          'CREATE TABLE $TABLE_NAME($ID INTEGER PRIMARY KEY,$EXPENSE_NAME TEXT,$AMOUNT REAL,$CATEGORY TEXT)');
     });
   }
 

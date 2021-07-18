@@ -1,44 +1,45 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:io' show Platform;
 
-class NotificationService {
-  FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
-  //final BehaviorSubject<RecievedNotifcation>;
-  NotificationService._() {
-    init();
-  }
-  void init() async {
-    _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    if (Platform.isIOS) {
-      _IOSPermission();
-    }
-    initPlatformSpecifics();
-  }
+import 'package:get/get_state_manager/get_state_manager.dart';
 
-  initPlatformSpecifics() {
-    var initIosSettings = IOSInitializationSettings(
-        requestAlertPermission: true,
-        requestBadgePermission: true,
+class NotificationService {
+  static final NotificationService _noti = NotificationService._internal();
+  factory NotificationService() {
+    return _noti;
+  }
+  NotificationService._internal();
+  FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
+
+  void init() {
+    var iOSinit = new IOSInitializationSettings(
+        requestAlertPermission: false,
+        requestBadgePermission: false,
         requestSoundPermission: false,
         onDidReceiveLocalNotification: (id, title, body, payload) async {});
-  }
-
-  _IOSPermission() {
+    var initSettings = new InitializationSettings(iOS: iOSinit);
+    _flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    _flutterLocalNotificationsPlugin.initialize(initSettings);
     _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             IOSFlutterLocalNotificationsPlugin>()
-        .requestPermissions(
-          alert: false,
-          badge: false,
+        ?.requestPermissions(
+          alert: true,
+          badge: true,
           sound: true,
         );
+    print("notifcation initialized");
   }
-}
 
-class RecievedNotifcation {
-  final int id;
-  final String title;
-  final String body;
-  final String payload;
-  RecievedNotifcation(this.id, this.title, this.body, this.payload);
+  showNotification() async {
+    var iosDetails = new IOSNotificationDetails(threadIdentifier: 'thread_id');
+    var generalNotificationDetails = new NotificationDetails(iOS: iosDetails);
+    return await _flutterLocalNotificationsPlugin.show(1, "Hey There!",
+        "Any expenses you want to track?", generalNotificationDetails,
+        payload: 'test payload');
+  }
+
+  void callMe() {
+    print("hI");
+  }
 }

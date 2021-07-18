@@ -3,14 +3,17 @@ import 'package:expensetracker/screens/metrics_screen.dart';
 import 'package:expensetracker/screens/settings_screen.dart';
 import 'package:expensetracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
+import 'package:expensetracker/services/notifcations_service.dart';
 
 class AppContainer extends StatefulWidget {
   _AppContainerState createState() => _AppContainerState();
 }
 
-class _AppContainerState extends State<AppContainer> {
+class _AppContainerState extends State<AppContainer>
+    with WidgetsBindingObserver {
   List _widgets = [ExpenseScreen(), MetricsScreen()];
   int _widgetIndex = 0;
+  NotificationService _noti;
 
   void changeScreen(int index) {
     setState(() {
@@ -18,11 +21,18 @@ class _AppContainerState extends State<AppContainer> {
     });
   }
 
+  @override
   void initState() {
     super.initState();
+    _noti = new NotificationService();
+    _noti.init();
   }
 
-//
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
