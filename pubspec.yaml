@@ -33,7 +33,7 @@ dependencies:
   google_fonts: ^2.1.0
   path_provider: ^2.0.2
   shared_preferences: ^2.0.6
-
+  syncfusion_flutter_charts: ^19.2.48
   flutter_local_notifications: 7.0.0-dev.1
   timezone: ^0.7.0
 flutter_icons:

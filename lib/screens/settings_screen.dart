@@ -1,5 +1,6 @@
+import 'package:expensetracker/controller/controller.dart';
 import 'package:expensetracker/services/notifcations_service.dart';
-
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -7,6 +8,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class SettingScreenState extends State<SettingsScreen> {
+  final DbController _controller = Get.put(DbController());
   NotificationService _noti;
   @override
   void initState() {
@@ -44,6 +46,12 @@ class SettingScreenState extends State<SettingsScreen> {
                 title: Text('Noti test'),
                 onTap: () async {
                   await _noti.showNotification();
+                }),
+            ListTile(
+                title: Text('Category test'),
+                onTap: () async {
+                  print("Cat called");
+                  await _controller.setExpensesToMap();
                 })
           ],
         ),

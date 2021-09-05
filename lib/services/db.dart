@@ -37,7 +37,7 @@ class DbClass {
     final db = await DbClass.instance.init();
     print(_newExpense.id);
     print(_newExpense.expense);
-
+    print(_newExpense.category);
     var res = await db.insert(DbClass.TABLE_NAME, _newExpense.toMap());
 
     return res;
@@ -48,5 +48,10 @@ class DbClass {
     print(_id);
     return await db
         .delete(DbClass.TABLE_NAME, where: '$ID=?', whereArgs: [_id]);
+  }
+
+  Future<List<Map>> getCategories() async {
+    Database db = await DbClass.instance.init();
+    return await db.rawQuery("SELECT $CATEGORY,$AMOUNT FROM $TABLE_NAME");
   }
 }

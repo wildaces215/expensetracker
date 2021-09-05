@@ -6,7 +6,13 @@ import 'package:expensetracker/controller/controller.dart';
 
 class ExpenseScreen extends StatelessWidget {
   final DbController _controller = Get.put(DbController());
-
+  List _categories = [
+    'Personal',
+    'Enterainment',
+    'Automotive',
+    'Medical',
+    'Other'
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

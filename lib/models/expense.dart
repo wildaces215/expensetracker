@@ -6,6 +6,11 @@ class Expense {
   Expense({this.id, this.expense, this.amount, this.category});
 
   Map<String, dynamic> toMap() {
-    return {'id': id, 'expense': expense, 'amount': amount};
+    return {
+      'id': id,
+      'expense': expense,
+      'amount': amount,
+      'category': category
+    };
   }
 }
